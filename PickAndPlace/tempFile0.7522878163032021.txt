@@ -1,0 +1,896 @@
+### Module positions - created on 6/23/2017 3:08:49 PM ###
+### Printed by Pcbnew version pcbnew 4.0.1-stable
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref    Val                  Package         PosX       PosY        Rot     Side
+D1       Led_Small        LGT676             38.1000   -76.2000      90.0    top
+D2       Led_Small        LGT676             57.1500   -76.2000      90.0    top
+D3       Led_Small        LGT676             76.2000   -76.2000      90.0    top
+meh
+D4       Led_Small        LGT676             95.2500   -76.2000      90.0    top
+D5       Led_Small        LGT676            114.3000   -76.2000      90.0    top
+D6       Led_Small        LGT676            133.3500   -76.2000      90.0    top
+D7       Led_Small        LGT676            152.4000   -76.2000      90.0    top
+D8       Led_Small        LGT676            171.4500   -76.2000      90.0    top
+D9       Led_Small        LGT676            190.5000   -76.2000      90.0    top
+D10      Led_Small        LGT676            209.5500   -76.2000      90.0    top
+D11      Led_Small        LGT676            228.6000   -76.2000      90.0    top
+D12      Led_Small        LGT676            247.6500   -76.2000      90.0    top
+D13      Led_Small        LGT676            266.7000   -76.2000      90.0    top
+D14      Led_Small        LGT676            285.7500   -76.2000      90.0    top
+D15      Led_Small        LGT676            304.8000   -76.2000      90.0    top
+D16      Led_Small        LGT676            323.8500   -76.2000      90.0    top
+D17      Led_Small        LGT676            342.9000   -76.2000      90.0    top
+D18      Led_Small        LGT676            361.9500   -76.2000      90.0    top
+D19      Led_Small        LGT676            381.0000   -76.2000      90.0    top
+D20      Led_Small        LGT676            400.0500   -76.2000      90.0    top
+D21      Led_Small        LGT676            419.1000   -76.2000      90.0    top
+D22      Led_Small        LGT676             40.6400  -101.6000      90.0    top
+D23      Led_Small        LGT676             57.1500  -101.6000      90.0    top
+D24      Led_Small        LGT676             76.2000  -101.6000      90.0    top
+D25      Led_Small        LGT676             95.2500  -101.6000      90.0    top
+D26      Led_Small        LGT676            114.3000  -101.6000      90.0    top
+D27      Led_Small        LGT676            133.3500  -101.6000      90.0    top
+D28      Led_Small        LGT676            152.4000  -101.6000      90.0    top
+D29      Led_Small        LGT676            171.4500  -101.6000      90.0    top
+D30      Led_Small        LGT676            190.5000  -101.6000      90.0    top
+D31      Led_Small        LGT676            209.5500  -101.6000      90.0    top
+D32      Led_Small        LGT676            228.6000  -101.6000      90.0    top
+D33      Led_Small        LGT676            247.6500  -101.6000      90.0    top
+D34      Led_Small        LGT676            266.7000  -101.6000      90.0    top
+D35      Led_Small        LGT676            285.7500  -101.6000      90.0    top
+D36      Led_Small        LGT676            304.8000  -101.6000      90.0    top
+D37      Led_Small        LGT676            323.8500  -101.6000      90.0    top
+D38      Led_Small        LGT676            342.9000  -101.6000      90.0    top
+D39      Led_Small        LGT676            361.9500  -101.6000      90.0    top
+D40      Led_Small        LGT676            381.0000  -101.6000      90.0    top
+D41      Led_Small        LGT676            400.0500  -101.6000      90.0    top
+D42      Led_Small        LGT676            419.1000  -101.6000      90.0    top
+D43      Led_Small        LGT676             38.1000  -127.0000      90.0    top
+D44      Led_Small        LGT676             57.1500  -127.0000      90.0    top
+D45      Led_Small        LGT676             76.2000  -127.0000      90.0    top
+D46      Led_Small        LGT676             95.2500  -127.0000      90.0    top
+D47      Led_Small        LGT676            114.3000  -127.0000      90.0    top
+D48      Led_Small        LGT676            133.3500  -127.0000      90.0    top
+D49      Led_Small        LGT676            152.4000  -127.0000      90.0    top
+D50      Led_Small        LGT676            171.4500  -127.0000      90.0    top
+D51      Led_Small        LGT676            190.5000  -127.0000      90.0    top
+D52      Led_Small        LGT676            209.5500  -127.0000      90.0    top
+D53      Led_Small        LGT676            228.6000  -127.0000      90.0    top
+D54      Led_Small        LGT676            247.6500  -127.0000      90.0    top
+D55      Led_Small        LGT676            266.7000  -127.0000      90.0    top
+D56      Led_Small        LGT676            285.7500  -127.0000      90.0    top
+D57      Led_Small        LGT676            304.8000  -127.0000      90.0    top
+D58      Led_Small        LGT676            323.8500  -127.0000      90.0    top
+D59      Led_Small        LGT676            342.9000  -127.0000      90.0    top
+D60      Led_Small        LGT676            361.9500  -127.0000      90.0    top
+D61      Led_Small        LGT676            381.0000  -127.0000      90.0    top
+D62      Led_Small        LGT676            400.0500  -127.0000      90.0    top
+D63      Led_Small        LGT676            419.1000  -127.0000      90.0    top
+R1       R_Small          R_0805_HandSolde   38.1000   -85.0900     270.0    top
+R2       R_Small          R_0805_HandSolde   57.1500   -85.0900     270.0    top
+R3       R_Small          R_0805_HandSolde   76.2000   -85.0900     270.0    top
+R4       R_Small          R_0805_HandSolde   95.2500   -85.0900     270.0    top
+R5       R_Small          R_0805_HandSolde  114.3000   -85.0900     270.0    top
+R6       R_Small          R_0805_HandSolde  133.3500   -85.0900     270.0    top
+R7       R_Small          R_0805_HandSolde  152.4000   -85.0900     270.0    top
+R8       R_Small          R_0805_HandSolde  171.4500   -85.0900     270.0    top
+R9       R_Small          R_0805_HandSolde  190.5000   -85.0900     270.0    top
+R10      R_Small          R_0805_HandSolde  209.5500   -85.0900     270.0    top
+R11      R_Small          R_0805_HandSolde  228.6000   -85.0900     270.0    top
+R12      R_Small          R_0805_HandSolde  247.6500   -85.0900     270.0    top
+R13      R_Small          R_0805_HandSolde  266.7000   -85.0900     270.0    top
+R14      R_Small          R_0805_HandSolde  285.7500   -85.0900     270.0    top
+R15      R_Small          R_0805_HandSolde  304.8000   -85.0900     270.0    top
+R16      R_Small          R_0805_HandSolde  323.8500   -85.0900     270.0    top
+R17      R_Small          R_0805_HandSolde  342.9000   -85.0900     270.0    top
+R18      R_Small          R_0805_HandSolde  361.9500   -85.0900     270.0    top
+R19      R_Small          R_0805_HandSolde  381.0000   -85.0900     270.0    top
+R20      R_Small          R_0805_HandSolde  400.0500   -85.0900     270.0    top
+R21      R_Small          R_0805_HandSolde  419.1000   -85.0900     270.0    top
+R22      R_Small          R_0805_HandSolde   38.1000  -110.4900     270.0    top
+R23      R_Small          R_0805_HandSolde   57.1500  -110.4900     270.0    top
+R24      R_Small          R_0805_HandSolde   76.2000  -110.4900     270.0    top
+R25      R_Small          R_0805_HandSolde   95.2500  -110.4900     270.0    top
+R26      R_Small          R_0805_HandSolde  114.3000  -110.4900     270.0    top
+R27      R_Small          R_0805_HandSolde  133.3500  -110.4900     270.0    top
+R28      R_Small          R_0805_HandSolde  152.4000  -110.4900     270.0    top
+R29      R_Small          R_0805_HandSolde  171.4500  -110.4900     270.0    top
+R30      R_Small          R_0805_HandSolde  190.5000  -110.4900     270.0    top
+R31      R_Small          R_0805_HandSolde  209.5500  -110.4900     270.0    top
+R32      R_Small          R_0805_HandSolde  228.6000  -110.4900     270.0    top
+R33      R_Small          R_0805_HandSolde  247.6500  -110.4900     270.0    top
+R34      R_Small          R_0805_HandSolde  266.7000  -110.4900     270.0    top
+R35      R_Small          R_0805_HandSolde  285.7500  -110.4900     270.0    top
+R36      R_Small          R_0805_HandSolde  304.8000  -110.4900     270.0    top
+R37      R_Small          R_0805_HandSolde  323.8500  -110.4900     270.0    top
+R38      R_Small          R_0805_HandSolde  342.9000  -110.4900     270.0    top
+R39      R_Small          R_0805_HandSolde  361.9500  -110.4900     270.0    top
+R40      R_Small          R_0805_HandSolde  381.0000  -110.4900     270.0    top
+R41      R_Small          R_0805_HandSolde  400.0500  -110.4900     270.0    top
+R42      R_Small          R_0805_HandSolde  419.1000  -110.4900     270.0    top
+R43      R_Small          R_0805_HandSolde   38.1000  -135.8900     270.0    top
+R44      R_Small          R_0805_HandSolde   57.1500  -135.8900     270.0    top
+R45      R_Small          R_0805_HandSolde   76.2000  -135.8900     270.0    top
+R46      R_Small          R_0805_HandSolde   95.2500  -135.8900     270.0    top
+R47      R_Small          R_0805_HandSolde  114.3000  -135.8900     270.0    top
+R48      R_Small          R_0805_HandSolde  133.3500  -135.8900     270.0    top
+R49      R_Small          R_0805_HandSolde  152.4000  -135.8900     270.0    top
+R50      R_Small          R_0805_HandSolde  171.4500  -135.8900     270.0    top
+R51      R_Small          R_0805_HandSolde  190.5000  -135.8900     270.0    top
+R52      R_Small          R_0805_HandSolde  209.5500  -135.8900     270.0    top
+R53      R_Small          R_0805_HandSolde  228.6000  -135.8900     270.0    top
+R54      R_Small          R_0805_HandSolde  247.6500  -135.8900     270.0    top
+R55      R_Small          R_0805_HandSolde  266.7000  -135.8900     270.0    top
+R56      R_Small          R_0805_HandSolde  285.7500  -135.8900     270.0    top
+R57      R_Small          R_0805_HandSolde  304.8000  -135.8900     270.0    top
+R58      R_Small          R_0805_HandSolde  323.8500  -135.8900     270.0    top
+R59      R_Small          R_0805_HandSolde  342.9000  -135.8900     270.0    top
+R60      R_Small          R_0805_HandSolde  361.9500  -135.8900     270.0    top
+R61      R_Small          R_0805_HandSolde  381.0000  -135.8900     270.0    top
+R62      R_Small          R_0805_HandSolde  400.0500  -135.8900     270.0    top
+R63      R_Small          R_0805_HandSolde  419.1000  -135.8900     270.0    top
+## End
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
+meh
