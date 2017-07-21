@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -30,7 +32,7 @@ public class MainGUI extends JFrame {
     private JMenuItem m_saveMachinePropertiesItem;
     private JMenuItem m_exitItem;
     private JMenuItem m_assignFeeders;
-    private JMenuItem m_generateFiles;
+    private JMenuItem m_generateNCFile;
     private JMenuItem m_printFeederInstructions;
 	
 	public static void main(String[] args) {
@@ -54,10 +56,11 @@ public class MainGUI extends JFrame {
         m_saveMachinePropertiesItem = new JMenuItem("Save Machine Properties");
         m_exitItem = new JMenuItem("Exit");
         m_assignFeeders = new JMenuItem("Assign Feeders");
-        m_generateFiles = new JMenuItem("Generate Files");
+        m_generateNCFile = new JMenuItem("Generate_NCFile");
         m_printFeederInstructions = new JMenuItem("Print Feeder Instructions");
         
         m_loadKiCadItem.addActionListener(new OpenAction());
+        m_generateNCFile.addActionListener(new OpenAction());
         
         JMenuBar menubar = new JMenuBar();  // Create new menu bar
             JMenu fileMenu = new JMenu("File"); // Create new menu
@@ -74,7 +77,7 @@ public class MainGUI extends JFrame {
                 assignFeedersMenu.add(m_assignFeeders);
             JMenu generateFilesMenu = new JMenu("Generate Files");
             	menubar.add(generateFilesMenu);
-            	generateFilesMenu.add(m_generateFiles);
+            	generateFilesMenu.add(m_generateNCFile);
             JMenu printFeederInstructions = new JMenu("Print Feeder Instructions");
             	menubar.add(printFeederInstructions);
             	printFeederInstructions.add(m_printFeederInstructions);
@@ -89,26 +92,28 @@ public class MainGUI extends JFrame {
 		fr.setLocation(x, y);
 	}
 	///////////////////////////////////////////////////////////// OpenAction
-	class OpenAction implements ActionListener {
+	private class OpenAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(MainGUI.this, "Can't Open.");
-			JOptionPane.showMessageDialog(MainGUI.this, "Are you sure you want to exit?");
-			JOptionPane.showConfirmDialog(MainGUI.this, "Are you sure you want to exit?");
+			if (e.getSource() == m_exitItem) {
+				dispose();
+			}
+			else if(e.getSource() == m_generateNCFile) {
+				try {
+					new MakeNCFile();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			//JOptionPane.showMessageDialog(MainGUI.this, "Can't Open.");
+			//JOptionPane.showMessageDialog(MainGUI.this, "Are you sure you want to exit?");
+			//JOptionPane.showConfirmDialog(MainGUI.this, "Are you sure you want to exit?");
 		}
 	}
 	
 	///////////////////////////////////////////////////////////// QuitAction
-	class QuitAction implements ActionListener {
+	private class QuitAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);  // Terminate the program.
-		}
-	}
-
-
-	//Method which defines the functionality of all buttons and text boxes
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == m_exitItem) {
-			dispose();
 		}
 	}
 }

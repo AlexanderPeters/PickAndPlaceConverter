@@ -21,5 +21,6 @@ public class ImagePanel extends JPanel {
 		JLabel label = new JLabel("", image, JLabel.CENTER);
 		this.setLayout(new BorderLayout());
 		this.add( label, BorderLayout.CENTER );
+		//TODO image scaling
 	}
 }
