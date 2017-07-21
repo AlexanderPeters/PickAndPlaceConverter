@@ -1,8 +1,17 @@
+/*
+ * Copyright 2017 (C) <GP Instruments>
+ * 
+ * Created on : 20-7-17
+ * Author     : Alexander Peters
+ *
+ *-----------------------------------------------------------------------------
+ * Revision History (Release 1.0.0.0)
+ */
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;

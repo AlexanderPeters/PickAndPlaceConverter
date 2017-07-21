@@ -1,2 +1,0 @@
-D1       Led_Small        LGT676             38.1000   -76.2000      90.0    top
-D2       Led_Small        LGT676             57.1500   -76.2000      90.0    top

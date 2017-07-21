@@ -21,8 +21,12 @@ public class FileSaver {
 	}
 	
 	
-	public void saveData(String[][] data) throws IOException {
+	public void saveData(String[][] data, int rowChanged) throws IOException {
+		System.out.println(rowChanged);
 		for(int i = 1; i <= helper.countLines(); i++)
-			helper.replaceLine(i, helper.assembleLine(data[i - 1], dataSeperator, dataTerminator));
+			if(i == rowChanged + 1) {
+				helper.replaceLine(i, helper.assembleLine(data[i - 1], dataSeperator, dataTerminator));
+				break;
+			}
 	}
 }

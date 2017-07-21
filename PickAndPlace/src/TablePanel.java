@@ -35,9 +35,9 @@ public class TablePanel extends JPanel {
 			public void tableChanged(TableModelEvent e) {
 				try {
 					if(GeneralLib.stringIsOnlyNumbersAndSigns(data[e.getLastRow()][e.getColumn()]) && allowableDataTypePerColumn[e.getColumn()] == 0)
-						saveDataTableChanges();
+						saveDataTableChanges(e.getLastRow());
 					else if(allowableDataTypePerColumn[e.getColumn()] == 1)
-						saveDataTableChanges();
+						saveDataTableChanges(e.getLastRow());
 					else
 						new PopupErrorPanel("Invalid Data Entry \n The Current Cell Data Will Not Be Saved!", "DataType Error!");
 				} catch (IOException e1) {
@@ -47,8 +47,8 @@ public class TablePanel extends JPanel {
 		});
 	}
 	
-	public void saveDataTableChanges() throws IOException {
-		saver.saveData(data);
+	public void saveDataTableChanges(int rowChanged) throws IOException {
+		saver.saveData(data, rowChanged);
 	}
 	
 	public Object[][] getTableData() {
