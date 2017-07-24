@@ -8,25 +8,29 @@
  * Revision History (Release 1.0.0.0)
  */
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
-
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-	private JPanel mainPanel = new JPanel();
+	private JPanel titleBar = new JPanel();
+    private JPanel mainPanel = new JPanel();
 	private JMenuItem m_loadKiCadItem;
     private JMenuItem m_loadMachinePropertiesItem;
     private JMenuItem m_saveMachinePropertiesItem;
@@ -34,7 +38,8 @@ public class MainGUI extends JFrame {
     private JMenuItem m_assignFeeders;
     private JMenuItem m_generateNCFile;
     private JMenuItem m_printFeederInstructions;
-	
+    private static String filePath = "";
+
 	public static void main(String[] args) {
 		MainGUI fr = new MainGUI();
 		centerFrame(fr);
@@ -42,10 +47,14 @@ public class MainGUI extends JFrame {
 
 	}
 
-	//Constructors to set up the options window
+	// Constructors to set up the options window
 	public MainGUI() {		
-		GroupLayout layout = new GroupLayout(mainPanel);
-		mainPanel.setLayout(layout);
+		BorderLayout bLayout = new BorderLayout();// Main Panel
+		mainPanel.setLayout(bLayout);
+		GroupLayout layout = new GroupLayout(titleBar);// Title Panel
+		titleBar.setLayout(layout);
+		mainPanel.add(titleBar, BorderLayout.NORTH);//Add Title Panel to Main Panel
+		
 		setSize((int) (dim.width/1.25), (int) (dim.height/1.25));
 		setTitle("Pick And Place Programmer");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,18 +81,30 @@ public class MainGUI extends JFrame {
                 fileMenu.add(m_saveMachinePropertiesItem);
                 fileMenu.addSeparator();
                 fileMenu.add(m_exitItem);
-            JMenu assignFeedersMenu = new JMenu("Assign Feeders");
+            JButton assignFeedersMenu = new JButton("Assign Feeders");
                 menubar.add(assignFeedersMenu);
                 assignFeedersMenu.add(m_assignFeeders);
-            JMenu generateFilesMenu = new JMenu("Generate Files");
+            JButton generateFilesMenu = new JButton("Generate Files");
             	menubar.add(generateFilesMenu);
             	generateFilesMenu.add(m_generateNCFile);
-            JMenu printFeederInstructions = new JMenu("Print Feeder Instructions");
+            JButton printFeederInstructions = new JButton("Print Feeder Instructions");
             	menubar.add(printFeederInstructions);
             	printFeederInstructions.add(m_printFeederInstructions);
            setJMenuBar(menubar);
 	}
-	//Method to allow the options window to be centered on the screen
+	
+	// Adds a Component to the main panel.
+	private void addComponent(Component comp, String l) {
+		if(!l.equals(BorderLayout.NORTH)) {
+			mainPanel.add(comp, l);
+			this.setVisible(false);
+			this.setVisible(true);
+		}
+		
+		else System.out.println("Illegal use of this method!");		
+	}
+	
+	// Method to allow the options window to be centered on the screen
 	private static void centerFrame(JFrame fr) {
 		int w = fr.getSize().width;
 		int h = fr.getSize().height;
@@ -91,19 +112,55 @@ public class MainGUI extends JFrame {
 		int y = (dim.height - h) / 2;
 		fr.setLocation(x, y);
 	}
+	
 	///////////////////////////////////////////////////////////// OpenAction
 	private class OpenAction implements ActionListener {
+		JButton b;
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == m_exitItem) {
 				dispose();
 			}
+			else if(e.getSource() == m_loadKiCadItem) {
+				JFileChooser fc = new JFileChooser();
+				FileNameExtensionFilter textFilter = new FileNameExtensionFilter("KICAD files", "pos");
+
+				fc.setCurrentDirectory(new File("C:/Users"));
+				fc.addChoosableFileFilter(textFilter);
+				fc.setAcceptAllFileFilterUsed(false);
+				JFrame container = new JFrame();
+				container.setTitle("Please select a KiCad file.");
+				container.setVisible(false);
+				
+				if (fc.showOpenDialog(container) == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fc.getSelectedFile();
+					container.dispose();
+					try {
+						filePath = selectedFile.getCanonicalPath();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
 			else if(e.getSource() == m_generateNCFile) {
 				try {
-					new MakeNCFile();
+					if (filePath.isEmpty())
+						new PopupErrorPanel("Error No File Selected \n Creation of NC File cannot proceed!",
+								"Data Select Error!");
+					else {
+						addComponent(new MakeNCFile(), BorderLayout.CENTER);
+						ButtonPanel bp;
+						addComponent((bp = new ButtonPanel(new String[] {"save", "mean", "dog"}, new String[] {BorderLayout.CENTER, "EAST", "WEST"})), BorderLayout.EAST);
+						b = (JButton) bp.getButtonByName("mean");
+						b.addActionListener(this);
+					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
+			
+			else if(e.getSource() == b)
+				System.out.println("hello world");
 			//JOptionPane.showMessageDialog(MainGUI.this, "Can't Open.");
 			//JOptionPane.showMessageDialog(MainGUI.this, "Are you sure you want to exit?");
 			//JOptionPane.showConfirmDialog(MainGUI.this, "Are you sure you want to exit?");
@@ -115,5 +172,9 @@ public class MainGUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);  // Terminate the program.
 		}
+	}
+	
+	public static String getFilePath() {
+		return filePath;
 	}
 }

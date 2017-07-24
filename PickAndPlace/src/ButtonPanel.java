@@ -8,9 +8,28 @@
  * Revision History (Release 1.0.0.0)
  */
 
+import java.awt.Component;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+// Creates a JPanel capable of holding up to 5 buttons
 public class ButtonPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	//TODO
+	private String[] names;
+
+	public ButtonPanel(String[] names, String[] locations) {
+		this.names = names;
+		if (this.names.length == locations.length)
+			for (int i = 0; i < this.names.length; i++)
+				this.add(new JButton(names[i]), locations[i]);
+		else
+			System.out.println("Error Array Lengths Do Not Match!" + Thread.currentThread().getStackTrace());
+	}
+	
+	public Component getButtonByName(String name) {
+		for(int i = 0; i < names.length; i++)
+			if(names[i].equals(name))
+				return this.getComponent(i);
+		return null;
+	}
 }
