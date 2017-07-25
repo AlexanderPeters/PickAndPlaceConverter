@@ -36,6 +36,8 @@ public class TablePanel extends JPanel {
 				try {
 					if(GeneralLib.stringIsOnlyNumbersAndSigns(data[e.getLastRow()][e.getColumn()]) && allowableDataTypePerColumn[e.getColumn()] == 0)
 						saveDataTableChanges(e.getLastRow());
+					else if(GeneralLib.stringIsOnlyCharachters(data[e.getLastRow()][e.getColumn()]) && allowableDataTypePerColumn[e.getColumn()] == 2)
+						saveDataTableChanges(e.getLastRow());
 					else if(allowableDataTypePerColumn[e.getColumn()] == 1)
 						saveDataTableChanges(e.getLastRow());
 					else

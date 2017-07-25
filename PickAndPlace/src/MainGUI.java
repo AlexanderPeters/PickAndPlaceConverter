@@ -116,6 +116,7 @@ public class MainGUI extends JFrame {
 	///////////////////////////////////////////////////////////// OpenAction
 	private class OpenAction implements ActionListener {
 		JButton b;
+		MakeNCFile maker;
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == m_exitItem) {
 				dispose();
@@ -137,7 +138,6 @@ public class MainGUI extends JFrame {
 					try {
 						filePath = selectedFile.getCanonicalPath();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -148,22 +148,18 @@ public class MainGUI extends JFrame {
 						new PopupErrorPanel("Error No File Selected \n Creation of NC File cannot proceed!",
 								"Data Select Error!");
 					else {
-						addComponent(new MakeNCFile(), BorderLayout.CENTER);
+						addComponent((maker = new MakeNCFile()), BorderLayout.CENTER);						
 						ButtonPanel bp;
-						addComponent((bp = new ButtonPanel(new String[] {"save", "mean", "dog"}, new String[] {BorderLayout.CENTER, "EAST", "WEST"})), BorderLayout.EAST);
-						b = (JButton) bp.getButtonByName("mean");
+						addComponent((bp = new ButtonPanel(new String[] {"save"}, new String[] {BorderLayout.CENTER})), BorderLayout.EAST);
+						b = (JButton) bp.getButtonByName("save");
 						b.addActionListener(this);
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
-			
 			else if(e.getSource() == b)
-				System.out.println("hello world");
-			//JOptionPane.showMessageDialog(MainGUI.this, "Can't Open.");
-			//JOptionPane.showMessageDialog(MainGUI.this, "Are you sure you want to exit?");
-			//JOptionPane.showConfirmDialog(MainGUI.this, "Are you sure you want to exit?");
+				maker.closing();
 		}
 	}
 	

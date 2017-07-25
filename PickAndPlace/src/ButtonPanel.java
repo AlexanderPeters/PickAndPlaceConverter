@@ -19,11 +19,11 @@ public class ButtonPanel extends JPanel {
 
 	public ButtonPanel(String[] names, String[] locations) {
 		this.names = names;
-		if (this.names.length == locations.length)
+		if (this.names.length == locations.length && locations.length < 6)
 			for (int i = 0; i < this.names.length; i++)
 				this.add(new JButton(names[i]), locations[i]);
 		else
-			System.out.println("Error Array Lengths Do Not Match!" + Thread.currentThread().getStackTrace());
+			System.out.println("Error Array Lengths Do Not Match! Or Too many buttons added!" + Thread.currentThread().getStackTrace());
 	}
 	
 	public Component getButtonByName(String name) {

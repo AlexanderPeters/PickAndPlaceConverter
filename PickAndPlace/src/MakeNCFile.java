@@ -10,25 +10,32 @@
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MakeNCFile extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private String newPath;
+	private DecimalFormat formatFive = new DecimalFormat("#####.");// Formats the number to 5 whole digits
 	
 	public MakeNCFile() throws IOException {
 		String filePath = MainGUI.getFilePath();
 		newPath = filePath.substring(0, filePath.length() - 4).concat("temp.txt");
 		
+		//TODO Make everything below this line take less time to execute. (USE ARRAYLISTS)
+		
 		// Instantiate
 		ReadAndWriteTXTLib helper = new ReadAndWriteTXTLib(filePath);
-		String[] columnNames = { "Step Number", "Part Name", "Package", "X Orient", "YOrient", "ThetaOrient" };
+		String[] columnNames = { "Step Number", "Value", "Package", "Skip Step", "X-Orient", "Y-Orient", "Head#", "Feeder#", "Angle-Orient",
+				"MountHeight-Comp.", "Comment", "Training Point" };
 		FileSaver saver = new FileSaver(newPath, ",", ";");
-		int[] allowableDataFormatPerColumn = { 1, 1, 1, 0, 0, 0 };// 0-Only Allows Numbers, 1-Doesn't Matter
-			// Trim Document
+		int[] allowableDataFormatPerColumn = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2 };// 0-Only Allows Numbers, 1-Doesn't Matter, 2-Only Charachters
+		// Trim Document
 		for (int i = 0; i < 5; i++)
 			helper.deleteNthLine(1);
 		for (int i = helper.countLines(); i > 0; i--)
@@ -36,45 +43,61 @@ public class MakeNCFile extends JPanel {
 				helper.deleteNthLine(i);
 				break;
 			}
-			// Condense Spacing
+		// Condense Spacing
 		helper.condenseAllLines();
-			// Correct Line Endings
+		// Correct Line Endings
 		helper.replaceAllInFile(" ", ",");
 		helper.replaceAllInFile(",top", ";");
 		helper.replaceAllInFile(",bottom", ";");
-			// Retrieve Line Data
-		String[][] data = new String[helper.countLines()][];
+		// Retrieve Line Data
+		List<String[]> data = new ArrayList<String[]>(helper.countLines());
 		for (int i = 1; i <= helper.countLines(); i++) {
-			data[i - 1] = helper.readLine(i, ",", new String[] { ";" });
+			data.add(helper.readLine(i, ",", new String[] { ";" }));
 		}
-			TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
-		this.add(table);
+		// Correct Data
+		for(String[] array: data) {
+			int i = 1;
+			// Correct Step Numbers
+			String lineNum = "000" + String.valueOf(i);
+			lineNum = lineNum.substring(lineNum.length() - 4);
+			array[0] = lineNum;
+			//Correct Number Values
+			array[3] = String.valueOf(formatFive.format(Double.parseDouble(array[3]) * 100));
+			array[4] = String.valueOf(formatFive.format(Double.parseDouble(array[4]) * 100));
+			array[5] = String.valueOf(formatFive.format(Double.parseDouble(array[5]) * 100));
+			i++;
+		}
+		for(String[] i: data)
+			for(String b: i)
+				System.out.println(b);
+		// Insert default values
+		
+		
+		
+		
+		//TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
+		//this.add(table);
 	}
 	
 	
 	public void closing() {
 		String ncFilePath = "";
 		JFileChooser fc = new JFileChooser();
-		FileNameExtensionFilter textFilter = new FileNameExtensionFilter("Pick and Place Files", "nc");
+		FileNameExtensionFilter textFilter = new FileNameExtensionFilter("Pick and Place Files", ".NC");
 
 		fc.setCurrentDirectory(new File("C:/Users"));
 		fc.addChoosableFileFilter(textFilter);
 		fc.setAcceptAllFileFilterUsed(false);
-		JFrame container = new JFrame();
-		container.setTitle("Please select a NC file to save to or create a new one.");
-		container.setVisible(true);
 		
-		if (fc.showOpenDialog(container) == JFileChooser.APPROVE_OPTION) {
+		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fc.getSelectedFile();
 			try {
 				ncFilePath = selectedFile.getCanonicalPath();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 		if(!ncFilePath.isEmpty()) {
-			container.dispose();
 			File ncFile = new File(ncFilePath);
 			File tempFile = new File(newPath);
 			tempFile.renameTo(ncFile);
