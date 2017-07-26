@@ -27,7 +27,7 @@ public class MakeNCFile extends JPanel {
 		String filePath = MainGUI.getFilePath();
 		newPath = filePath.substring(0, filePath.length() - 4).concat("temp.txt");
 		
-		//TODO Make everything below this line take less time to execute. (USE ARRAYLISTS)
+		//TODO Make everything below this line take less time to execute.
 		
 		// Instantiate
 		ReadAndWriteTXTLib helper = new ReadAndWriteTXTLib(filePath);
@@ -43,40 +43,52 @@ public class MakeNCFile extends JPanel {
 				helper.deleteNthLine(i);
 				break;
 			}
+		
 		// Condense Spacing
 		helper.condenseAllLines();
+		
 		// Correct Line Endings
 		helper.replaceAllInFile(" ", ",");
 		helper.replaceAllInFile(",top", ";");
 		helper.replaceAllInFile(",bottom", ";");
+		
 		// Retrieve Line Data
-		List<String[]> data = new ArrayList<String[]>(helper.countLines());
+		List<List<String>> data = new ArrayList<List<String>>();
 		for (int i = 1; i <= helper.countLines(); i++) {
 			data.add(helper.readLine(i, ",", new String[] { ";" }));
 		}
+		
 		// Correct Data
-		for(String[] array: data) {
-			int i = 1;
+		int i = 1;
+		for(List<String> lineList: data) {
 			// Correct Step Numbers
 			String lineNum = "000" + String.valueOf(i);
 			lineNum = lineNum.substring(lineNum.length() - 4);
-			array[0] = lineNum;
+			lineList.set(0, lineNum);
 			//Correct Number Values
-			array[3] = String.valueOf(formatFive.format(Double.parseDouble(array[3]) * 100));
-			array[4] = String.valueOf(formatFive.format(Double.parseDouble(array[4]) * 100));
-			array[5] = String.valueOf(formatFive.format(Double.parseDouble(array[5]) * 100));
+			lineList.set(3, String.valueOf(formatFive.format(Double.parseDouble(lineList.get(3)) * 100)));
+			lineList.set(4, String.valueOf(formatFive.format(Double.parseDouble(lineList.get(4)) * 100)));
+			lineList.set(5, String.valueOf(formatFive.format(Double.parseDouble(lineList.get(5)) * 100)));
 			i++;
 		}
-		for(String[] i: data)
-			for(String b: i)
-				System.out.println(b);
+		
 		// Insert default values
+		for(List<String> lineList: data) {
+			lineList.add(3, "0");
+			lineList.add(6, "0");
+			lineList.add(7, "0");
+			lineList.add(9, "0");
+			lineList.add(10, "Comment");
+			lineList.add(11, "N");
+		}
 		
-		
-		
-		
-		//TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
-		//this.add(table);
+		//TODO
+		//Error Checking
+		//Saving
+		//Insert, Delete, Append Lines of the JTable
+				
+		TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
+		this.add(table);
 	}
 	
 	

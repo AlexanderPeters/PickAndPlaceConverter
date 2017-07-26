@@ -9,6 +9,7 @@
  */
 
 import java.io.IOException;
+import java.util.List;
 
 public class FileSaver {
 	ReadAndWriteTXTLib helper;
@@ -21,11 +22,14 @@ public class FileSaver {
 	}
 	
 	
-	public void saveData(String[][] data, int rowChanged) throws IOException {
-		for(int i = 1; i <= helper.countLines(); i++)
+	public void saveData(List<List<String>> data, int rowChanged) throws IOException {
+		int i = 1;
+		for(List<String> lineList: data) {
 			if(i == rowChanged + 1) {
-				helper.replaceLine(i, helper.assembleLine(data[i - 1], dataSeperator, dataTerminator));
+				helper.replaceLine(i, helper.assembleLine(lineList, dataSeperator, dataTerminator));
 				break;
 			}
+			i++;
+		}
 	}
 }

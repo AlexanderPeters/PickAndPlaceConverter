@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -247,10 +248,10 @@ public class ReadAndWriteTXTLib {
 	}
 	
 	// Assembles a CSV format line from the given items, and defined and terminator characters.
-	public String assembleLine(String[] items, String seperator, String terminator) {
+	public String assembleLine(List<String> items, String seperator, String terminator) {
 		String a = "", b  = "";
-		for(int i = 0; i < items.length; i++) {
-			b = condense(items[i].replaceAll(terminator, " "));
+		for(String item: items) {
+			b = condense(item.replaceAll(terminator, " "));
 			a += b += seperator;
 		}
 		a = a.substring(0, a.length()-1);
@@ -258,9 +259,12 @@ public class ReadAndWriteTXTLib {
 	}
 	
 	// Reads in a line from the file located at filePath and returns a list of important and separated values.
-	public String[] readLine (int lineNum, String lineSplitString, String[] possibleEndOfLineStrings) {
+	public List<String> readLine (int lineNum, String lineSplitString, String[] possibleEndOfLineStrings) {
 		String line = getLine(lineNum);
-		String[] values = line.substring(0, indexOfPartOfAnArray(line, possibleEndOfLineStrings)).split(lineSplitString);
+		String[] parts = line.substring(0, indexOfPartOfAnArray(line, possibleEndOfLineStrings)).split(lineSplitString);
+		List<String> values = new ArrayList<String>(0);
+		for(String part: parts)
+			values.add(part);
 		return values;
 	}
 	

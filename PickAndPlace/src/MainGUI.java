@@ -70,6 +70,7 @@ public class MainGUI extends JFrame {
         
         m_loadKiCadItem.addActionListener(new OpenAction());
         m_generateNCFile.addActionListener(new OpenAction());
+        m_exitItem.addActionListener(new QuitAction());
         
         JMenuBar menubar = new JMenuBar();  // Create new menu bar
             JMenu fileMenu = new JMenu("File"); // Create new menu
@@ -118,10 +119,7 @@ public class MainGUI extends JFrame {
 		JButton b;
 		MakeNCFile maker;
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == m_exitItem) {
-				dispose();
-			}
-			else if(e.getSource() == m_loadKiCadItem) {
+			if(e.getSource() == m_loadKiCadItem) {
 				JFileChooser fc = new JFileChooser();
 				FileNameExtensionFilter textFilter = new FileNameExtensionFilter("KICAD files", "pos");
 
