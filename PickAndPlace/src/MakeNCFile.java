@@ -34,7 +34,19 @@ public class MakeNCFile extends JPanel {
 		String[] columnNames = { "Step Number", "Value", "Package", "Skip Step", "X-Orient", "Y-Orient", "Head#", "Feeder#", "Angle-Orient",
 				"MountHeight-Comp.", "Comment", "Training Point" };
 		FileSaver saver = new FileSaver(newPath, ",", ";");
-		int[] allowableDataFormatPerColumn = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2 };// 0-Only Allows Numbers, 1-Doesn't Matter, 2-Only Charachters
+		/*
+		 *0 - stringIsBetween0and9999
+		 *1 - anything goes
+		 *2 - stringOnlyContainsOneDigit0To9
+		 *3 - stringIsBetweenNegative99999andPositive99999
+		 *4 - stringOnlyContainsOneTwoOrThree
+		 *5 - stringIsBetween1and100
+		 *6 - stringIsBetween0and35999
+		 *7 - stringIsBetweenNegative999andPositive999
+		 *8 -  stringIsLessThanOrEqualTo10CharactersInLength
+		 *9 - stringIsOnlyYorN
+		 */
+		int[] allowableDataFormatPerColumn = { 0,1,1,2,2,3,4,5,6,7,8,9 };
 		// Trim Document
 		for (int i = 0; i < 5; i++)
 			helper.deleteNthLine(1);
@@ -83,9 +95,9 @@ public class MakeNCFile extends JPanel {
 		}
 		
 		//TODO
-		//Error Checking
 		//Saving
 		//Insert, Delete, Append Lines of the JTable
+		//Comment all the things
 				
 		TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
 		this.add(table);
