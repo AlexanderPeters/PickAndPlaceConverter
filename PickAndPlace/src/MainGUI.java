@@ -20,10 +20,12 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainGUI extends JFrame {
@@ -44,7 +46,6 @@ public class MainGUI extends JFrame {
 		MainGUI fr = new MainGUI();
 		centerFrame(fr);
 		fr.setVisible(true);
-
 	}
 
 	// Constructors to set up the options window
@@ -116,8 +117,9 @@ public class MainGUI extends JFrame {
 	
 	///////////////////////////////////////////////////////////// OpenAction
 	private class OpenAction implements ActionListener {
-		JButton b;
-		MakeNCFile maker;
+		JButton saveButton, insertButton, deleteButton;
+		JTextField insertField, deleteField;
+		MakeNCFile NCFileMaker;
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == m_loadKiCadItem) {
 				JFileChooser fc = new JFileChooser();
@@ -146,18 +148,76 @@ public class MainGUI extends JFrame {
 						new PopupErrorPanel("Error No File Selected \n Creation of NC File cannot proceed!",
 								"Data Select Error!");
 					else {
-						addComponent((maker = new MakeNCFile()), BorderLayout.CENTER);						
-						ButtonPanel bp;
-						addComponent((bp = new ButtonPanel(new String[] {"save"}, new String[] {BorderLayout.CENTER})), BorderLayout.EAST);
-						b = (JButton) bp.getButtonByName("save");
-						b.addActionListener(this);
+						JLabel insertRowLabel, deleteRowLabel;
+						JPanel insertandDeletePanel = new JPanel();
+						
+						GroupLayout layout = new GroupLayout(insertandDeletePanel);
+						insertandDeletePanel.setLayout(layout);
+						layout.setAutoCreateGaps(true);
+						layout.setAutoCreateContainerGaps(true);
+						
+						insertButton = new JButton("Insert row.");
+						deleteButton = new JButton("Delete row.");
+						saveButton = new JButton("Save");
+						insertButton.addActionListener(this);
+						deleteButton.addActionListener(this);
+						saveButton.addActionListener(this);	
+						
+						insertRowLabel = new JLabel("Row number to insert at.");
+						deleteRowLabel = new JLabel("Row number to delete.");
+						
+						insertField = new JTextField(4);
+						deleteField = new JTextField(4);
+						
+						insertField.setText("0001");
+						deleteField.setText("0001");
+						
+						layout.setHorizontalGroup(layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup()
+										.addComponent(insertRowLabel)
+										.addComponent(insertField)
+										.addComponent(insertButton))
+								.addGroup(layout.createParallelGroup()
+										.addComponent(deleteRowLabel)
+										.addComponent(deleteField)
+										.addComponent(deleteButton))
+						);
+						
+						layout.setVerticalGroup(layout.createSequentialGroup()
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+										.addComponent(insertRowLabel)
+										.addComponent(deleteRowLabel))
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+										.addComponent(insertField)
+										.addComponent(deleteField))
+								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+										.addComponent(insertButton)
+										.addComponent(deleteButton))	
+						);
+						
+						addComponent(insertandDeletePanel, BorderLayout.WEST);
+						addComponent((NCFileMaker = new MakeNCFile()), BorderLayout.CENTER);						
+						addComponent(saveButton, BorderLayout.EAST);
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
-			else if(e.getSource() == b)
-				maker.closing();
+			else if(e.getSource() == saveButton)
+				NCFileMaker.closing();
+			else if(e.getSource() == insertButton) {
+				System.out.println("Click");
+				if(Integer.parseInt(insertField.getText()) != 0)
+					NCFileMaker.getTablePanel().insertRow(Integer.parseInt(insertField.getText()));
+				else
+					new PopupErrorPanel("Invalid Data Entry \n Please Enter a Number Greater Than 0.", "DataType Error!");
+			}
+				
+			else if(e.getSource() == deleteButton)
+				if(Integer.parseInt(insertField.getText()) != 0)
+					NCFileMaker.getTablePanel().deleteRow(Integer.parseInt(insertField.getText()));
+				else
+					new PopupErrorPanel("Invalid Data Entry \n Please Enter a Number Greater Than 0.", "DataType Error!");
 		}
 	}
 	

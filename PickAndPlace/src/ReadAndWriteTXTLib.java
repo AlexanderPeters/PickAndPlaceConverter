@@ -47,7 +47,6 @@ public class ReadAndWriteTXTLib {
 	// Sets the file location to be used.
 	public void setFilePath(String e) {
 		filePath = e;
-
 	}
 	
 	//Creates a new text file at filePath with the provided data within it.
@@ -214,7 +213,7 @@ public class ReadAndWriteTXTLib {
 	    raf.close();
 	}
 	
-	//
+	// Reduces Whitespace From a Given Line To One Space Wherever There Were Multiple Before
 	public String condense(String line) {
 		String newLine  = "";
 		if(line != " " && line != null) {

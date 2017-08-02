@@ -22,10 +22,11 @@ public class MakeNCFile extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private String newPath;
 	private DecimalFormat formatFive = new DecimalFormat("#####.");// Formats the number to 5 whole digits
+	private TablePanel table;
 	
 	public MakeNCFile() throws IOException {
 		String filePath = MainGUI.getFilePath();
-		newPath = filePath.substring(0, filePath.length() - 4).concat("temp.txt");
+		//newPath = filePath.substring(0, filePath.length() - 4).concat("temp.txt");
 		
 		//TODO Make everything below this line take less time to execute.
 		
@@ -33,9 +34,9 @@ public class MakeNCFile extends JPanel {
 		ReadAndWriteTXTLib helper = new ReadAndWriteTXTLib(filePath);
 		String[] columnNames = { "Step Number", "Value", "Package", "Skip Step", "X-Orient", "Y-Orient", "Head#", "Feeder#", "Angle-Orient",
 				"MountHeight-Comp.", "Comment", "Training Point" };
-		FileSaver saver = new FileSaver(newPath, ",", ";");
+		FileSaver saver = new FileSaver(filePath, ",", ";");
 		/*
-		 *0 - stringIsBetween0and9999
+		 *0 - Column Can Not Be Edited
 		 *1 - anything goes
 		 *2 - stringOnlyContainsOneDigit0To9
 		 *3 - stringIsBetweenNegative99999andPositive99999
@@ -99,7 +100,7 @@ public class MakeNCFile extends JPanel {
 		//Insert, Delete, Append Lines of the JTable
 		//Comment all the things
 				
-		TablePanel table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
+		table = new TablePanel(saver, columnNames, data, allowableDataFormatPerColumn);
 		this.add(table);
 	}
 	
@@ -129,5 +130,9 @@ public class MakeNCFile extends JPanel {
 		}
 		else new PopupErrorPanel("Error No File Selected \n Saving of NC File cannot proceed!",
 				"Data Select Error!");
+	}
+	
+	public TablePanel getTablePanel() {
+		return table;
 	}
 }

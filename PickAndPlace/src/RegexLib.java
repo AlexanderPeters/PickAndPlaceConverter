@@ -24,8 +24,10 @@ public class RegexLib {
 		return text.matches("[a-zA-Z]+");
 	}
 	
-	public static boolean stringIsBetween0and9999(String text) {
-		return text.matches("^(?:[1-9][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[0-9])$");
+	public static boolean stringIsBetween1and9999(String text) {
+		System.out.println(text);
+		System.out.println(text.matches("(?!0{4})^\\d{4}$"));
+		return text.matches("(?!0{4})^\\d{4}$");
 	}
 	
 	public static boolean stringOnlyContainsOneDigit0To9(String text) {
@@ -33,7 +35,7 @@ public class RegexLib {
 	}
 	
 	public static boolean stringIsBetweenNegative99999andPositive99999(String text) {
-		
+		return text.matches("\\-?\\d\\{0-4\\}");
 	}
 	
 	public static boolean stringOnlyContainsOneTwoOrThree(String text) {
@@ -41,7 +43,7 @@ public class RegexLib {
 	}
 	
 	public static boolean stringIsBetween1and100(String text) {
-		
+		return text.matches("\b([1-9]|[1-8][0-9]|9[0-9]|100)\b");
 	}
 	
 	public static boolean stringIsBetween0and35999(String text) {
@@ -51,7 +53,7 @@ public class RegexLib {
 	}
 	
 	public static boolean stringIsBetweenNegative999andPositive999(String text) {
-		
+		return text.matches("\\-?\\d\\{0-3\\}");
 	}
 	
 	public static boolean stringIsLessThanOrEqualTo10CharactersInLength(String text) {

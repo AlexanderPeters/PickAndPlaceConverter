@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -32,33 +33,34 @@ public class TablePanel extends JPanel {
 	public TablePanel(FileSaver saver, String[] columnNames, List<List<String>> data, int[] allowableDataTypePerColumn) {
 		this.saver = saver;
 		this.data = data;
-		model = createModel(data, columnNames);
+		model = new myModel(this.data, columnNames, allowableDataTypePerColumn);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
 		table.setFillsViewportHeight(true);
 		table.getModel().addTableModelListener(new TableModelListener() {
 			public void tableChanged(TableModelEvent e) {
+				// The data currently located in the cell which just changed.
+				String cellChanged = ((String) table.getModel().getValueAt(e.getLastRow(), e.getColumn()));
+				
 				try {
-					if(RegexLib.stringIsBetween0and9999(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 0)
+					if(allowableDataTypePerColumn[e.getColumn()] == 1)
 						saveDataTableChanges(e.getLastRow());
-					else if(allowableDataTypePerColumn[e.getColumn()] == 1)
+					else if(RegexLib.stringOnlyContainsOneDigit0To9(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 2)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringOnlyContainsOneDigit0To9(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 2)
+					else if(RegexLib.stringIsBetweenNegative99999andPositive99999(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 3)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsBetweenNegative99999andPositive99999(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 3)
+					else if(RegexLib.stringOnlyContainsOneTwoOrThree(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 4)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringOnlyContainsOneTwoOrThree(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 4)
+					else if(RegexLib.stringIsBetween1and100(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 5)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsBetween1and100(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 5)
+					else if(RegexLib.stringIsBetween0and35999(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 6)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsBetween0and35999(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 6)
+					else if(RegexLib.stringIsBetweenNegative999andPositive999(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 7)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsBetweenNegative999andPositive999(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 7)
+					else if(RegexLib.stringIsLessThanOrEqualTo10CharactersInLength(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 8)
 						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsLessThanOrEqualTo10CharactersInLength(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 8)
-						saveDataTableChanges(e.getLastRow());
-					else if(RegexLib.stringIsOnlyYorN(data.get(e.getLastRow()).get(e.getColumn())) && allowableDataTypePerColumn[e.getColumn()] == 9)
+					else if(RegexLib.stringIsOnlyYorN(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 9)
 						saveDataTableChanges(e.getLastRow());
 					else
 						new PopupErrorPanel("Invalid Data Entry \n The Current Cell Data Will Not Be Saved!", "DataType Error!");
@@ -67,6 +69,7 @@ public class TablePanel extends JPanel {
 				}
 			}
 		});
+		 
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		resizeColumnWidth(table);
 		
@@ -83,14 +86,39 @@ public class TablePanel extends JPanel {
 		return data;
 	}
 	
-	public DefaultTableModel createModel(List<List<String>> list, String[] columnNames) {
-
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        for (List<String> row : list) {
-            model.addRow(row.toArray());
+	public void insertRow(int row) {
+		//Add New Line
+		data.add(row, data.get(row));
+		
+		//Update Line Numbers
+		for(int i = row; i < data.size(); i++)
+			data.get(i).set(0, String.valueOf(Integer.parseInt(data.get(i).get(0)) + 1)); 
+		
+		//Force Update Table
+		updateTable();
+	}
+	
+	public void deleteRow(int row) {
+		
+	}
+	
+	private class myModel extends DefaultTableModel {
+		private static final long serialVersionUID = 1L;
+		int[] nonEditableColumns;
+		
+		myModel(List<List<String>> list, String[] columnNames, int[] nonEditableColumns) {
+			this.nonEditableColumns = nonEditableColumns;
+			this.setColumnIdentifiers(columnNames);
+	        for (List<String> row : list) {
+	            this.addRow(row.toArray());
+	        }       
+	    }
+		
+		@Override 
+        public boolean isCellEditable(int row, int column) {
+			if(nonEditableColumns[column] == 0) return false;
+			return true;
         }
-
-        return model;
     }
 
 	public void resizeColumnWidth(JTable table) {
@@ -106,5 +134,12 @@ public class TablePanel extends JPanel {
 	            width = 300;
 	        columnModel.getColumn(column).setPreferredWidth(width);
 	    }
+	}
+	
+	//TODO
+	private void updateTable() {
+		model.fireTableStructureChanged();
+		table.setModel(model);
+		table.repaint();
 	}
 }
