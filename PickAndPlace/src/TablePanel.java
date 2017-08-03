@@ -25,7 +25,7 @@ import javax.swing.table.TableColumnModel;
 
 public class TablePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private DefaultTableModel model;
+	private myModel model;
 	private JTable table;
 	private FileSaver saver;
 	private List<List<String>> data;
@@ -87,19 +87,27 @@ public class TablePanel extends JPanel {
 	}
 	
 	public void insertRow(int row) {
-		//Add New Line
+		//Update Data
 		data.add(row, data.get(row));
-		
+				
 		//Update Line Numbers
-		for(int i = row; i < data.size(); i++)
+		for(int i = row + 1; i < data.size(); i++) {
 			data.get(i).set(0, String.valueOf(Integer.parseInt(data.get(i).get(0)) + 1)); 
-		
-		//Force Update Table
-		updateTable();
+			model.updateRow(row, data.get(row));
+		}
+		table.setModel(model);
 	}
 	
 	public void deleteRow(int row) {
+		//Delete data
+		data.remove(row);
 		
+		//Update Line Numbers
+		for(int i = row + 1; i < data.size(); i++) {
+			data.get(i).set(0, String.valueOf(Integer.parseInt(data.get(i).get(0)) - 1)); 
+			model.updateRow(row, data.get(row));
+		}
+		table.setModel(model);
 	}
 	
 	private class myModel extends DefaultTableModel {
@@ -119,6 +127,11 @@ public class TablePanel extends JPanel {
 			if(nonEditableColumns[column] == 0) return false;
 			return true;
         }
+		
+		public void updateRow(int row, List<String> rowData) {
+			for(int i = 0; i < this.getColumnCount(); i++)
+				this.setValueAt(rowData.get(i), row, i);
+		}
     }
 
 	public void resizeColumnWidth(JTable table) {
@@ -134,12 +147,5 @@ public class TablePanel extends JPanel {
 	            width = 300;
 	        columnModel.getColumn(column).setPreferredWidth(width);
 	    }
-	}
-	
-	//TODO
-	private void updateTable() {
-		model.fireTableStructureChanged();
-		table.setModel(model);
-		table.repaint();
 	}
 }

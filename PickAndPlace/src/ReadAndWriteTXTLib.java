@@ -267,7 +267,7 @@ public class ReadAndWriteTXTLib {
 		return values;
 	}
 	
-	//Replace all instances of String a located within the file with instances of String b
+	// Replace all instances of String a located within the file with instances of String b
 	public void replaceAllInFile(String a, String b) throws IOException {
 		for(int i = 1; i <= countLines(); i++) {
 			replaceLine(i, getLine(i).replaceAll(a, b));
@@ -275,7 +275,7 @@ public class ReadAndWriteTXTLib {
 	}
 	
 	// Finds the first index of any word found in the array within the given string.
-	//Returns -1 if none of the strings are found.
+	// Returns -1 if none of the strings are found.
 	private int indexOfPartOfAnArray(String stringToBeSearched, String[] stringsToFind) {
 		int a  = -1, b;
 		for(int i = 0; i < stringsToFind.length; i++)
