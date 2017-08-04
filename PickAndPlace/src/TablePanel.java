@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -62,10 +63,10 @@ public class TablePanel extends JPanel {
 						saveDataTableChanges(e.getLastRow());
 					else if(RegexLib.stringIsOnlyYorN(cellChanged) && allowableDataTypePerColumn[e.getColumn()] == 9)
 						saveDataTableChanges(e.getLastRow());
-					else
-						new PopupErrorPanel("Invalid Data Entry \n The Current Cell Data Will Not Be Saved!", "DataType Error!");
+					//else
+						//new PopupErrorPanel("Invalid Data Entry \n The Current Cell Data Will Not Be Saved!", "DataType Error!");
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					e1.printStackTrace(); 
 				}
 			}
 		});
@@ -88,12 +89,15 @@ public class TablePanel extends JPanel {
 	
 	public void insertRow(int row) {
 		//Update Data
-		data.add(row, data.get(row));
+		data.add(row, data.get(row-1));
+		model.updateRow(row, data.get(row));
 				
 		//Update Line Numbers
-		for(int i = row + 1; i < data.size(); i++) {
-			data.get(i).set(0, String.valueOf(Integer.parseInt(data.get(i).get(0)) + 1)); 
-			model.updateRow(row, data.get(row));
+		for(int i = row; i < data.size(); i++) {
+			String lineNum = "000" + String.valueOf(Integer.parseInt(data.get(i).get(0)) + 1);
+			lineNum = lineNum.substring(lineNum.length() - 4);
+			data.get(i).set(0, lineNum); 
+			model.updateRow(i, data.get(i));
 		}
 		table.setModel(model);
 	}
@@ -129,8 +133,15 @@ public class TablePanel extends JPanel {
         }
 		
 		public void updateRow(int row, List<String> rowData) {
-			for(int i = 0; i < this.getColumnCount(); i++)
-				this.setValueAt(rowData.get(i), row, i);
+			for(int i = 0; i < this.getColumnCount(); i++) {
+				if(row ==  this.getRowCount()) {
+					this.addRow(data.get(this.getRowCount()).toArray());// Add a buffer row
+					this.setValueAt(rowData.get(i), row, i);// Update the last row in the table
+					this.removeRow(this.getRowCount());// Remove the buffer row
+				}
+				else
+					this.setValueAt(rowData.get(i), row, i);
+			}
 		}
     }
 
